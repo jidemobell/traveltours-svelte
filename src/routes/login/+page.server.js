@@ -5,17 +5,17 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { fail, redirect } from "@sveltejs/kit";
-const GOOGLE_API_KEY = process.env['GOOGLE_API_KEY']
-
+import { fail } from "@sveltejs/kit";
+import { AppConstants } from "../../lib/server/constants";
+const GOOGLE_API_KEY = process.env["GOOGLE_API_KEY"];
 const config = {
   apiKey: GOOGLE_API_KEY,
-  authDomain: "jelvintour.firebaseapp.com",
-  projectId: "jelvintour",
-  storageBucket: "jelvintour.appspot.com",
-  messagingSenderId: "1006155413516",
-  appId: "1:1006155413516:web:0d56dbce52e6764d7c1629",
-  measurementId: "G-8S7NDFPD1J",
+  authDomain: AppConstants.authDomain,
+  projectId: AppConstants.projectId,
+  storageBucket: AppConstants.storageBucket,
+  messagingSenderId: AppConstants.messagingSenderId,
+  appId: AppConstants.appId,
+  measurementId: AppConstants.measurementId,
 };
 
 const app = firebase.initializeApp(config);
@@ -58,13 +58,11 @@ export const actions = {
           }),
         });
 
-        
-
         // const fetchedUser = response.users[0];
         const { data } = await response.json();
         let userArray = data.profiles;
 
-        console.log("fetched http user", userArray, cookies)
+        console.log("fetched http user", userArray, cookies);
 
         const token = jwt.sign({ userId: userArray[0].id }, "mysecret", {
           expiresIn: "1h",
@@ -73,10 +71,10 @@ export const actions = {
         cookies.set("session_id", token, {
           path: "/",
           httpOnly: true,
-          secure: false
+          secure: false,
         });
 
-        console.log('THE COOKIE',cookies)
+        console.log("THE COOKIE", cookies);
         return { success: true };
       })
       .catch((error) => {
