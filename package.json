@@ -20,6 +20,7 @@
 		"@sveltejs/adapter-auto": "^3.2.1",
 		"appear": "^1.0.1",
 		"bcryptjs": "^2.4.3",
+		"dotenv": "^16.4.5",
 		"firebase": "^10.12.2",
 		"graphql": "^16.8.2",
 		"jquery": "^3.7.1",

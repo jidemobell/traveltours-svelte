@@ -6,9 +6,10 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { fail, redirect } from "@sveltejs/kit";
+const GOOGLE_API_KEY = process.env['GOOGLE_API_KEY']
 
 const config = {
-  apiKey: import.meta.env.VITE_NAME_OF_VARIABLE,
+  apiKey: GOOGLE_API_KEY,
   authDomain: "jelvintour.firebaseapp.com",
   projectId: "jelvintour",
   storageBucket: "jelvintour.appspot.com",

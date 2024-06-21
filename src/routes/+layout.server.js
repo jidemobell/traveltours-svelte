@@ -1,4 +1,5 @@
 import { browser } from '$app/environment';
+import 'dotenv/config'
 
 /** @type {import('./$types').LayoutServerLoad} */
 export async function load({ cookies }) {
