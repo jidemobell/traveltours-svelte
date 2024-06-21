@@ -8,7 +8,7 @@ import {
 import { fail, redirect } from "@sveltejs/kit";
 
 const config = {
-  apiKey: "AIzaSyCo77r8f2-cPQUAKU-lZcAgUte7EfMV-3Y",
+  apiKey: import.meta.env.VITE_NAME_OF_VARIABLE,
   authDomain: "jelvintour.firebaseapp.com",
   projectId: "jelvintour",
   storageBucket: "jelvintour.appspot.com",
