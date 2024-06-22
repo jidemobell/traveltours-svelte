@@ -6,7 +6,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { fail } from "@sveltejs/kit";
-import { AppConstants } from "../../lib/server/constants";
+import { AppConstants } from "$lib/server/constants";
 const GOOGLE_API_KEY = process.env["GOOGLE_API_KEY"];
 const config = {
   apiKey: GOOGLE_API_KEY,
