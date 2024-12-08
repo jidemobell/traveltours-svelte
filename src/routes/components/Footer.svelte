@@ -7,7 +7,7 @@
             <div class="footer-column col-xl-4 col-lg-3 col-md-6 col-sm-12">
               <div class="footer-widget about-widget">
                 <div class="footer-logo">
-                  <a href="index.html" title="Travilo"
+                  <a href="/" title="Travilo"
                     ><img
                       src="/images/jaytours.svg"
                       style="height: 80px; width: 80px"

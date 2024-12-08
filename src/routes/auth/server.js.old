@@ -1,0 +1,32 @@
+// import { json } from '@sveltejs/kit';
+// // Initialize Firebase Admin SDK (only once)
+
+
+// export async function POST({ request }) {
+//   try {
+//     console.log("ALL REQUEST", request)
+//     const userData = await request.json();
+//     // const { idToken, userData } = await request.json();
+
+//     // Verify the Firebase ID token
+//     // const decodedToken = await admin.auth().verifyIdToken(idToken);
+
+//     // Save or update user data in the database
+//     // console.log('Decoded Token:', decodedToken);
+//     console.log('User Data:', userData);
+
+//     // (Optional) Add database save logic here
+//     // Example:
+//     // await database.saveUser({
+//     //   uid: decodedToken.uid,
+//     //   email: decodedToken.email,
+//     //   displayName: userData.displayName,
+//     //   photoURL: userData.photoURL
+//     // });
+
+//     return json({ success: true, message: 'User logged in successfully' });
+//   } catch (error) {
+//     console.error('Error verifying token:', error);
+//     return json({ success: false, message: 'Authentication failed' }, { status: 401 });
+//   }
+// }

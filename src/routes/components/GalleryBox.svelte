@@ -13,7 +13,7 @@
           data-wow-duration="1500ms"
         >
           <div class="image-box">
-            <a href="index.html"
+            <a href="/"
               ><img
                 src="/images/jelvincoreimages/istockphoto-1216664416-612x612.jpg"
                 alt="Gallery 1"
@@ -34,7 +34,7 @@
           data-wow-duration="1500ms"
         >
           <div class="image-box">
-            <a href="index.html"
+            <a href="/"
               ><img
                 src="/images/jelvincoreimages/istockphoto-1448753927-612x612.jpg"
                 alt="Gallery 2"
@@ -55,7 +55,7 @@
           data-wow-duration="1500ms"
         >
           <div class="image-box">
-            <a href="index.html"
+            <a href="/"
               ><img
                 src="/images/jelvincoreimages/istockphoto-1451750787-612x612.jpg"
                 alt="Gallery 3"
@@ -76,7 +76,7 @@
           data-wow-duration="1500ms"
         >
           <div class="image-box">
-            <a href="index.html"
+            <a href="/"
               ><img
                 src="/images/jelvincoreimages/istockphoto-490266163-612x612.jpg"
                 alt="Gallery 12"
@@ -97,7 +97,7 @@
           data-wow-duration="1500ms"
         >
           <div class="image-box">
-            <a href="index.html"
+            <a href="/"
               ><img
                 src="/images/jelvincoreimages/photo-1558787160-7eebf53009be.avif"
                 alt="Gallery  14"
@@ -118,7 +118,7 @@
           data-wow-duration="1500ms"
         >
           <div class="image-box">
-            <a href="index.html"
+            <a href="/"
               ><img
                 src="/images/jelvincoreimages/istockphoto-535280599-612x612.jpg"
                 alt="Gallery 15"
@@ -139,7 +139,7 @@
           data-wow-duration="1500ms"
         >
           <div class="image-box">
-            <a href="index.html"
+            <a href="/"
               ><img
                 src="/images/jelvincoreimages/istockphoto-990888242-612x612.jpg"
                 alt="Gallery 6"
@@ -160,7 +160,7 @@
           data-wow-duration="1500ms"
         >
           <div class="image-box">
-            <a href="index.html"
+            <a href="/"
               ><img
                 src="/images/jelvincoreimages/bc17-ghana-crop.jpg"
                 alt="Gallery  7"

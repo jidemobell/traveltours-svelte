@@ -11,7 +11,7 @@
         <!--Logo-->
         <div class="logo-box">
           <div class="logo">
-            <a href="index.html" title="Travilo"
+            <a href="/" title="Travilo"
               ><img
                 src="/images/jaytours.svg"
                 alt="Travilo Logo"
@@ -38,7 +38,7 @@
                     </ul>
                   </li> -->
                 <li class="dropdown">
-                  <a href="index.html">Tours</a>
+                  <a href="/">Tours</a>
                   <!-- <ul>
                       <li>
                         <a href="tour-list.html">Tours List</a>
@@ -108,9 +108,9 @@
         </div>
 
         <div class="links-box clearfix">
-          <!-- <div class="link login">
-                <a href="/error">Login / Signup</a>
-              </div> -->
+          <div class="link login">
+                <a href="/auth">Login</a>
+              </div>
           <!-- <div class="link lang-box">
               <div class="lang-btn clearfix">
                 <span class="txt">En</span><span class="icon far fa-angle-down"></span>

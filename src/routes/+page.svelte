@@ -1,9 +1,10 @@
 <script>
+  // export let user
   // import "../styles/utils/styles.css";
 
   // import Packages from "./Packages.svelte";
-  import PackagesNew from "./PackagesNew.svelte";
-  import TrendingDestinations from "./TrendingDestinations.svelte";
+  import PackagesNew from "./components/PackagesNew.svelte";
+  import TrendingDestinations from "./components/TrendingDestinations.svelte";
 
 </script>
 
@@ -13,6 +14,12 @@
 
 <main>
   <!--Menu Backdrop-->
+  <!-- {#if user}
+  <p>Welcome, {user}!</p>
+{:else}
+  <p>You are not logged in.</p>
+{/if} -->
+
   <div class="menu-backdrop" style="border: 5px black solid"></div>
 
   <!-- Hidden Navigation Bar -->
