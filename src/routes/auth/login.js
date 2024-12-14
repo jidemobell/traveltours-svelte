@@ -116,7 +116,6 @@ export async function customLoginUtility({ cookies, request }) {
     
     dataBaseDataObject = await responseGet.json();
      const { data } = dataBaseDataObject;
-     console.log(data)
      const { uuid, email } = data.getUser;
      const token = generateToken({ uuid });
 

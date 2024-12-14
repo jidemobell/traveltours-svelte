@@ -4,7 +4,7 @@
   export let data = undefined;
   const {user} = data
 
-  $: loginVisible = (!data) ? "is_visible" : "is_not_visible"
+  $: loginVisible = (user) ? "is_not_visible" : "is_visible"
 </script>
 
 <div>
@@ -95,7 +95,9 @@
               <span class="nmbr">+233547255814</span></a
             >
           </div>
+          <!-- {#if user} -->
           <ProfileBox {data} />
+          <!-- {/if} -->
         </div>
       </div>
     </div>
