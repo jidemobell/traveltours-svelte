@@ -5,6 +5,7 @@
   const {user} = data
 
   $: loginVisible = (user) ? "is_not_visible" : "is_visible"
+  console.log(data)
 </script>
 
 <div>
@@ -95,9 +96,9 @@
               <span class="nmbr">+233547255814</span></a
             >
           </div>
-          <!-- {#if user} -->
+          {#if user !== null }
           <ProfileBox {data} />
-          <!-- {/if} -->
+          {/if}
         </div>
       </div>
     </div>
