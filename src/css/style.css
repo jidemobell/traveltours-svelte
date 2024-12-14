@@ -2117,9 +2117,8 @@ body.visible-sidebar{
 
 .packages-section{
   position: relative;
-  padding: 130px 0px;
+  /* padding: 130px 0px; */
   background: #fafaee;
-
 }
 
 .packages-section .title-box{
@@ -2139,7 +2138,7 @@ body.visible-sidebar{
 .packages-section .carousel-box{
   position: relative;
   margin: 0 -12px;
-  border: 9px solid blue;
+  border: 2px solid blue;
 
 }
 
@@ -2163,7 +2162,7 @@ body.visible-sidebar{
 .package-block{
   position: relative;
   margin-bottom: 30px;
-  border: 9px solid red;
+  /* border: 9px solid red; */
   /* width: 400px; */
   /* max-width: 500px; */
 }
@@ -2192,7 +2191,7 @@ body.visible-sidebar{
   box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.07);
   min-height: 100%;
   border-radius: 10px;
-  border: 9px solid purple;
+  /* border: 9px solid purple; */
 }
 
 .package-block .image-box{

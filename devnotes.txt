@@ -1,0 +1,12 @@
+- the backend app is running on nodejd
+- it is installed on ibmcloud
+- the project is run with IBM Cloud Engine and in a container using ibm cloud container runtime
+- the front end is built in svelete
+- it is developed continously on netlify
+
+-- firebase login should be implemented later
+-- for security stop herd thundering error 
+
+
+- try ibm carbon components
+- learn about enhancements for UI accessibility

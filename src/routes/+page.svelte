@@ -2,6 +2,9 @@
   import PackagesNew from "./components/PackagesNew.svelte";
   import TrendingDestinations from "./components/TrendingDestinations.svelte";
 
+
+  export let data;
+  const {packages} = data
 </script>
 
 <style>
@@ -377,7 +380,7 @@
   </div>
 
   <!--Packages Section-->
-     <PackagesNew />
+     <PackagesNew {packages} />
   <!--Trending Destinations Section-->
     <TrendingDestinations />
   <!--Tour Types Section-->

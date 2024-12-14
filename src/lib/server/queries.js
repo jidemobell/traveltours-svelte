@@ -21,3 +21,13 @@ export const creatUser  =`mutation createUser($google_id: String!, $password: St
   }
 }`
  
+
+export const allPackages = `query {
+  AllPackages {
+    id
+    name
+    description
+    created_at
+    updated_at
+  }
+}`
