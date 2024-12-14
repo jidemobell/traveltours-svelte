@@ -2136,10 +2136,10 @@ body.visible-sidebar{
 }
 
 .packages-section .carousel-box{
+  /* PACKAGES HERE */
   position: relative;
   margin: 0 -12px;
-  border: 2px solid blue;
-
+  /* border: 2px solid blue; */
 }
 
 /* .packages-carousel {
@@ -2162,9 +2162,6 @@ body.visible-sidebar{
 .package-block{
   position: relative;
   margin-bottom: 30px;
-  /* border: 9px solid red; */
-  /* width: 400px; */
-  /* max-width: 500px; */
 }
 
 .packages-section .row{
@@ -2336,6 +2333,8 @@ body.visible-sidebar{
 
 .package-block h5 a{
   color: var(--dark-gray-gray);
+  font-size: 12px;
+  font-weight: 100;
 }
 
 .package-block h5 a:hover{

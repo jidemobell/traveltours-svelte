@@ -2,6 +2,7 @@
 <script>
   export let destination
   $: data = (destination) ? destination : null
+  console.log(destination)
 </script>
 
 <style>
@@ -23,8 +24,8 @@
       <div class="image">
         <a href="tour-single.html"
           ><img
-            src="/images/jelvincoreimages/destinations/orva-studio-Y5biRJCR-Q4-unsplash.jpg"
-            alt="Italy"
+            src={data.links}
+            alt={data.name}
           /></a
         >
       </div>
