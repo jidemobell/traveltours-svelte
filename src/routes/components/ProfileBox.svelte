@@ -5,9 +5,11 @@
 </script>
 
 <div class="profile_box">
+  {#if user}
   <a href="/user" class="profile">
     {user.exp}
   </a>
+  {/if}
 </div>
 
 
