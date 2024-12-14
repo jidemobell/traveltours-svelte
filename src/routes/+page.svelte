@@ -1,8 +1,4 @@
 <script>
-  // export let user
-  // import "../styles/utils/styles.css";
-
-  // import Packages from "./Packages.svelte";
   import PackagesNew from "./components/PackagesNew.svelte";
   import TrendingDestinations from "./components/TrendingDestinations.svelte";
 

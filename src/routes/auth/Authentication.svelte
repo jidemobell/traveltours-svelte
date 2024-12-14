@@ -9,9 +9,12 @@
     max-width: 400px;
     margin: 0 auto;
     padding: 2rem;
-    background-color: #f9f9f9;
+    /* background-color: #f9f9f9; */
+    background-color: white;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 12rem;
+    margin-bottom: 5rem;
   }
 
   /* .login-container h1 {
@@ -71,7 +74,7 @@
 </style>
 
 
-<main style="padding: 2rem; margin-top: 7rem; margin-bottom: 7rem; max-width: 600px; margin-left: auto; margin-right: auto; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); border-radius: 8px; background: white;">
+<!-- <main style="padding: 2rem; margin-top: 7rem; margin-bottom: 7rem; max-width: 600px; margin-left: auto; margin-right: auto; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); border-radius: 8px; background: white;"> -->
 <div class="login-container">
   <form method="POST" action="?/login">
     <div>
@@ -109,4 +112,4 @@
     {/if}
   </form>
 </div>
-</main>
+<!-- </main> -->

@@ -5,11 +5,13 @@ import { redirect } from "@sveltejs/kit";
 /** @type {import('./$types').LayoutServerLoad} */
 export async function load({ url, cookies, locals }) {
   const token = cookies.get("token");
-
   if(!token){
-    // throw redirect(303, '/')
-    if(url.pathname !== '/') throw redirect(303, '/');
+    if(url.pathname !== '/' && url.pathname !== '/auth' ) throw redirect(303, '/')
     return { user: null }
+  }
+
+  if (token && url.pathname === '/auth') {
+    throw redirect(303, '/user');
   }
 
   try {

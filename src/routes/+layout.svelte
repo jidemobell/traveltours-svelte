@@ -2,16 +2,7 @@
   /** @type {import('./$types').LayoutData} */
   import Header from "./components/Header.svelte";
   import Footer from "./components/Footer.svelte";
-   
-  // import { ApolloClient } from "@apollo/client/core";
-  // import { setClient } from "@svelte-apollo/workspace"
-
-
-  // const client = new ApolloClient({
-  //   /* ... */
-  // });
-
-  // setClient(client);
+  export let data;
 </script>
 
 <svelte:head>
@@ -77,7 +68,7 @@
 </svelte:head>
 
 <div>
-  <Header />
+  <Header {data} />
   <main>
     <slot />
   </main>

@@ -1,10 +1,10 @@
-import {  LOGIN } from './login';
+import {  customLoginUtility, customRegisterUtil } from './login';
 import { LOGOUT } from './logout';
 
 
 /** @type {import('./$types').Actions} */
 export const actions = {
-  login: LOGIN,
+  login: customLoginUtility,
   logout: LOGOUT,
-  // google: POST
+  register: customRegisterUtil
 };

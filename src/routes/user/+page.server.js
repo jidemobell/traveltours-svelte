@@ -1,16 +1,3 @@
-
-// /** @type {import('./$types').LayoutServerLoad} */
-// export async function load({ cookies }) {
-//   const session = cookies.get('session_id');
-//   // if (!session) {
-//   //   redirect(307, "/");
-//   // }
-//   console.log("dashboard server", session)
-//   return {
-//     session
-//   };
-// }
-
 /** @type {import('./$types').PageServerLoad} */
 export async function load(event) {
 	return {
