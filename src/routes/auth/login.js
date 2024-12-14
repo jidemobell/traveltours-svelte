@@ -1,5 +1,6 @@
 import { generateToken } from "$lib/jwt";
 import { getUser, creatUser } from "../../lib/server/queries";
+import {  AppConstants   } from "../../lib/server/constants";
 import { redirect } from "@sveltejs/kit";
 
 import { auth, signInWithEmailAndPassword } from "$lib/firebase";
@@ -18,7 +19,7 @@ export async function LOGIN({ cookies, request }) {
     .then(async (fireUserCredentials) => {
       const fireUser = await fireUserCredentials.user;
       //get user from neon database
-      const responseGet = await fetch("http://localhost:4000/graphql", {
+      const responseGet = await fetch(AppConstants.SERVER_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -33,12 +34,12 @@ export async function LOGIN({ cookies, request }) {
       if (!responseGet) {
         //create new user
         // throw new Error(`HTTP error! status: ${res.status}`);
-        const responseCreate = await fetch("http://localhost:4000/graphql", {
+        const responseCreate = await fetch(AppConstants.SERVER_URL, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             query: creatUser,
-            variables: {
+            variables: {  
               email: fireUser.email,
               password: appPasswords,
               google_id: fireUser.uid,
@@ -93,7 +94,7 @@ export async function customLoginUtility({ cookies, request }) {
   const formPassword = await formdata.get("password");
   // try {
   //check if the user already exist
-  const responseGet = await fetch("http://localhost:4000/graphql", {
+  const responseGet = await fetch(AppConstants.SERVER_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -126,16 +127,6 @@ export async function customLoginUtility({ cookies, request }) {
       maxAge: 60 * 60 * 24 * 7, // 7 days
     });
     throw redirect(301, "/user");
-  
-     
-
-  // } catch (error) {
-  //   console.log("ERROR:", error)
-  //   return {
-  //     status: 400,
-  //     error: error,
-  //   };
-  // }
 
 }
 
@@ -149,7 +140,7 @@ export async function customRegisterUtil({ cookies, request }) {
   const formPassword = await formdata.get("password");
 
   //check if the user already exist
-  const responseCreate = await fetch("http://localhost:4000/graphql", {
+  const responseCreate = await fetch(AppConstants.SERVER_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -163,7 +154,7 @@ export async function customRegisterUtil({ cookies, request }) {
 
   if (responseCreate === 1) {
     //get the user
-    const responseGet = await fetch("http://localhost:4000/graphql", {
+    const responseGet = await fetch(AppConstants.SERVER_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
