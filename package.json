@@ -9,7 +9,7 @@
   },
   "devDependencies": {
     "@grafbase/sdk": "~0.26.0",
-    "@sveltejs/adapter-cloudflare": "^4.5.0",
+    "@sveltejs/adapter-cloudflare": "^4.8.0",
     "@sveltejs/adapter-netlify": "^4.2.1",
     "@sveltejs/kit": "^2.0.0",
     "@sveltejs/vite-plugin-svelte": "^3.0.0",
