@@ -1,5 +1,7 @@
 // import adapter from '@sveltejs/adapter-netlify';
-import adapter from '@sveltejs/adapter-cloudflare';
+// import adapter from '@sveltejs/adapter-cloudflare';
+import vercel from '@sveltejs/adapter-vercel';
+
 
 
 // export default {
@@ -18,23 +20,23 @@ import adapter from '@sveltejs/adapter-cloudflare';
 // 	}
 // };
 
-export default {
-	kit: {
-		adapter: adapter({
-			// See below for an explanation of these options
-			routes: {
-				include: ['/*'],
-				exclude: ['<all>']
-			},
-			platformProxy: {
-				// configPath: 'wrangler.toml',
-				environment: undefined,
-				experimentalJsonConfig: false,
-				persist: false
-			}
-		})
-	}
-};
+// export default {
+// 	kit: {
+// 		adapter: adapter({
+// 			// See below for an explanation of these options
+// 			routes: {
+// 				include: ['/*'],
+// 				exclude: ['<all>']
+// 			},
+// 			platformProxy: {
+// 				// configPath: 'wrangler.toml',
+// 				environment: undefined,
+// 				experimentalJsonConfig: false,
+// 				persist: false
+// 			}
+// 		})
+// 	}
+// };
 
 // export default {
 //   kit: {
@@ -49,3 +51,9 @@ export default {
 //     }
 //   }
 // };
+
+export default {
+  kit: {
+    adapter: vercel(),
+  }
+};
