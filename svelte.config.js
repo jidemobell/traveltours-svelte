@@ -18,34 +18,34 @@ import adapter from '@sveltejs/adapter-cloudflare';
 // 	}
 // };
 
-// export default {
-// 	kit: {
-// 		adapter: adapter({
-// 			// See below for an explanation of these options
-// 			routes: {
-// 				include: ['/*'],
-// 				exclude: ['<all>']
-// 			},
-// 			platformProxy: {
-// 				configPath: 'wrangler.toml',
-// 				environment: undefined,
-// 				experimentalJsonConfig: false,
-// 				persist: false
-// 			}
-// 		})
-// 	}
-// };
-
 export default {
-  kit: {
-    adapter: adapter({
-      // options
-      pages: 'build', // Output directory for Cloudflare
-      assets: 'build', // Directory for static assets
-      fallback: null // Set to "index.html" for SPA behavior
-    }),
-    prerender: {
-      default: true // Prerender all pages
-    }
-  }
+	kit: {
+		adapter: adapter({
+			// See below for an explanation of these options
+			routes: {
+				include: ['/*'],
+				exclude: ['<all>']
+			},
+			platformProxy: {
+				// configPath: 'wrangler.toml',
+				environment: undefined,
+				experimentalJsonConfig: false,
+				persist: false
+			}
+		})
+	}
 };
+
+// export default {
+//   kit: {
+//     adapter: adapter({
+//       // options
+//       pages: 'build', // Output directory for Cloudflare
+//       assets: 'build', // Directory for static assets
+//       fallback: null // Set to "index.html" for SPA behavior
+//     }),
+//     prerender: {
+//       default: true // Prerender all pages
+//     }
+//   }
+// };
