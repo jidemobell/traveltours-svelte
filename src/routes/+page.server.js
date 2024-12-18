@@ -14,7 +14,6 @@ export async function load(event) {
   })
   const packages = await response.json();
   const { data} = packages
-  // console.log(data.AllPackages)
   return {
 		packages: data.AllPackages
 	};

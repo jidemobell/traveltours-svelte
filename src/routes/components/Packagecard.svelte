@@ -2,7 +2,6 @@
 <script>
   export let destination
   $: data = (destination) ? destination : null
-  console.log(destination)
 </script>
 
 <style>
