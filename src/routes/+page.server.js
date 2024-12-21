@@ -1,7 +1,8 @@
 import { AppConstants } from '../lib/server/constants';
 import { allPackages } from '../lib/server/queries';
 
-
+// const GOOGLE_API_KEY = process.env["GOOGLE_API_KEY"];
+// console.log("GOOGLE_API_KEY", GOOGLE_API_KEY)
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load(event) {

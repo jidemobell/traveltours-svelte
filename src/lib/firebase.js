@@ -34,6 +34,7 @@ export const creatUser  = `mutation( $email: String) {
 // Replace with your Firebase project configuration
 // const GOOGLE_API_KEY="AIzaSyCo77r8f2-cPQUAKU-lZcAgUte7EfMV-3Y"
 // const GOOGLE_API_KEY = process.env["GOOGLE_API_KEY"];
+// console.log("GOOGLE_API_KEY", GOOGLE_API_KEY)
 const GOOGLE_API_KEY = import.meta.env.VITE_API_GOOGLE_API_KEY
 
 const config = {
