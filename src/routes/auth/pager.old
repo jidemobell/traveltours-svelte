@@ -1,0 +1,134 @@
+<script>
+  import { onMount } from "svelte";
+
+  import Authentication from "./Authentication.svelte";
+
+  import { auth, signInWithEmailAndPassword, provider } from "$lib/firebase";
+  import { signInWithRedirect, getRedirectResult } from "firebase/auth";
+
+  // import { goto } from "$app/navigation";
+
+  // const VITE_API_GOOGLE_API_KEY =  import.meta.env.VITE_API_GOOGLE_API_KEY
+
+  let user = null;
+  let error = null;
+
+  // import AuthForm from "./AuthForm.svelte";
+  // import GoogleLogin from "./GoogleLogin.svelte";
+  // import LoginWithGoogle from "./LoginWithGoogle.svelte";
+
+  onMount(async () => {
+    // Check if we're returning from a redirect
+    try {
+      const result = await getRedirectResult(auth).catch(
+        (err) => (error = err.message)
+      );
+      // let result = {
+      //   user: {
+      //     "uid": "existingUser123",
+      //     "email": "existing@example.com",
+      //     "displayName": "Jane Doe",
+      //     "photoURL": "https://example.com/photo.jpg",
+      //   },
+      //   "credential": {
+      //   "accessToken": "ya29.a0AfH6SMB...exampletoken",
+      //   "idToken": "eyJhbGciOiJSUzI1NiIsImtpZCI...exampleidtoken"
+      //   },
+      //   "operationType": "signIn",
+      //   "additionalUserInfo": {
+      //   "isNewUser": false,
+      //   "profile": {
+      //   "given_name": "Jane",
+      //   "family_name": "Doe",
+      //   "email": "existing@example.com",
+      //    },
+      //    "providerId": "google.com"
+      //   }
+      // }
+
+      if (result) {
+        console.log("Successfully signed in with redirect", result);
+        user = result.user;
+        console.log("User:", user);
+        // If you want to store user info in session cookies or server, you can do so here.
+        // For now, just redirect to the home page.
+        // Send Firebase ID token to the server
+        const idToken = await user.getIdToken();
+        await fetch("/auth/firebase", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ idToken }),
+        });
+
+        // const data = await response.json();
+        // console.log("Server response:", data);
+
+        // goto("/user");
+      }
+    } catch (error) {
+      error = err.message;
+    }
+  });
+
+  function loginWithGoogle() {
+    signInWithRedirect(auth, provider);
+  }
+</script>
+
+<!-- <AuthForm /> -->
+<!-- <Authentication /> open this -->
+<!-- <GoogleLogin /> -->
+
+<!-- <button on:click={loginWithGoogle}>Login with Google</button> -->
+<button class="google-btn login-container" on:click={loginWithGoogle}>
+  <img src="/images/newicons/google.png" alt="Google Logo" />
+  Sign in with Google
+</button>
+{#if error}
+  <p style="color: red;">{error}</p>
+{/if}
+
+<style>
+  .google-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    color: #555;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition:
+      background-color 0.3s,
+      box-shadow 0.3s;
+  }
+
+  .google-btn:hover {
+    background-color: #f7f7f7;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  }
+
+  .google-btn img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+  }
+
+  .login-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 2rem;
+    /* background-color: #f9f9f9; */
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 12rem;
+    margin-bottom: 5rem;
+  }
+</style>

@@ -5,13 +5,15 @@
   const {user} = data
 
   $: loginVisible = (user) ? "is_not_visible" : "is_visible"
-  console.log(data)
+  $: headerFixed  = (user) ? "main-header" : "main-header header-fixed"
+  $: lowerHeaderFixed  = (user) ? "header-upper" : "header-upper header-fixed"
+  // console.log(data)
 </script>
 
 <div>
-  <header class="main-header"> 
+  <header class={headerFixed}> 
       <!-- Header Upper -->
-  <div class="header-upper">
+  <div class={lowerHeaderFixed}>
     <div class="auto-container">
       <!-- Main Box -->
       <div class="main-box clearfix">
@@ -109,6 +111,11 @@
 </div>
 
 <style>
+  .header-fixed {
+    position: fixed;
+    /* border: red spx solid;
+    background: blue; */
+  }
   .is_visible{
     visibility: unset;
   }

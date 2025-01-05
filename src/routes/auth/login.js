@@ -52,9 +52,9 @@ export async function LOGIN({ cookies, request }) {
 
       dataBaseDataObject = await res.json();
       const { data } = dataBaseDataObject;
-      const { uid, email } = data.getUser;
+      const { uuid, email } = data.getUser;
       // Replace this with actual authentication logic
-      const token = generateToken({ uid });
+      const token = generateToken({ uuid });
       cookies.set("token", token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production", // HTTPS in production
@@ -180,3 +180,27 @@ export async function customRegisterUtil({ cookies, request }) {
     
   }
 }
+
+
+// export const POST = async ({ request }) => {
+//   const { idToken } = await request.json();
+
+//   try {
+//       // Verify the Firebase ID token
+//       const decodedToken = await getAuth(app).verifyIdToken(idToken);
+
+//       // Create a session or return a JWT for the user
+//       const { uid, email, name } = decodedToken;
+
+//       // Optionally, save user details in your database
+//       console.log('Authenticated Google User:', { uid, email, name });
+
+//       // Return a session cookie or other response
+//       return new Response(JSON.stringify({ message: 'Login successful', user: { email, name } }), {
+//           status: 200
+//       });
+//   } catch (error) {
+//       console.error('Firebase token verification failed:', error);
+//       return new Response(JSON.stringify({ message: 'Invalid token' }), { status: 401 });
+//   }
+// };
