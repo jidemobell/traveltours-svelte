@@ -22,6 +22,7 @@
     "@apollo/client": "^3.10.8",
     "@auth/sveltekit": "^1.7.4",
     "@graphql-codegen/cli": "^5.0.2",
+    "@neondatabase/serverless": "^1.0.0",
     "@nhost/vue": "^2.6.2",
     "@sveltejs/adapter-auto": "^3.2.1",
     "@sveltejs/adapter-vercel": "^5.5.2",

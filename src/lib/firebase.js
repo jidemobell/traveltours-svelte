@@ -1,6 +1,5 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult, signInWithEmailAndPassword } from 'firebase/auth';
-// import {AppConstants} from "./server/constants";
 
 export const AppConstants = {
   authDomain: "jelvintour.firebaseapp.com",
@@ -11,25 +10,6 @@ export const AppConstants = {
   measurementId: "G-8S7NDFPD1J",
 };
 
-
-export const getUser = 
-`query getUser($email: String!) {
-  getUser(email:$email) {
-    uuid
-    name
-    created_at
-    email
-  }
-}`
-
-export const creatUser  = `mutation( $email: String) {
-  insert_profiles(objects: [{
-   email: $email, last_seen: "now()"
-  }], on_conflict: {constraint: profiles_pkey, update_columns: [last_seen, email]}
-  ) {
-    affected_rows
-  }
- }`
 
 // Replace with your Firebase project configuration
 // const GOOGLE_API_KEY="AIzaSyCo77r8f2-cPQUAKU-lZcAgUte7EfMV-3Y"

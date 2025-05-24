@@ -1,14 +1,11 @@
 <script>
-  
-  import {onMount} from 'svelte';
+  import { onMount } from "svelte";
 
-  import {auth, provider, signInWithRedirect} from "$lib/firebase.js"
-  
-  
+  import { auth, provider, signInWithRedirect } from "$lib/firebase.js";
+
   function handleGoogleLogin() {
     signInWithRedirect(auth, provider);
   }
-
 
   onMount(async () => {
     try {
@@ -16,27 +13,35 @@
       if (result) {
         // User is signed in
         const user = result.user;
-        console.log('User info:', user);
+        const idToken = await user.getIdToken();
+        console.log("User info:", user);
         // You can redirect the user to another page or handle the user info as needed
+        await fetch("/api/auth", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ idToken }),
+        });
       }
     } catch (error) {
-      console.error('Error during sign-in with redirect:', error);
+      console.error("Error during sign-in with redirect:", error);
     }
   });
 </script>
-
 
 <main class="main-container">
   <div class="login-container centered">
     <!-- Illustration Section -->
     <div class="illustration" id="overlay">
-      <img src="/images/jelvincoreimages/istockphoto-656582672-612x612.jpg" alt="Login Illustration" />
+      <img
+        src="/images/jelvincoreimages/istockphoto-656582672-612x612.jpg"
+        alt="Login Illustration"
+      />
     </div>
 
     <!-- Login Form Section -->
     <div class="login-form">
       <!-- <h1>Welcome to Design School</h1> -->
-      <div class="social-login" style="border: red solid 1px;" >
+      <div class="social-login" style="border: red solid 1px;">
         <button on:click={handleGoogleLogin}>
           <img
             src="/images/jelvincoreimages/toursicons/2993685_brand_brands_google_logo_logos_icon.svg"
@@ -82,18 +87,18 @@
   }
 
   #overlay {
-  position: fixed; /* Sit on top of the page content */
-  display: none; /* Hidden by default */
-  width: 100%; /* Full width (cover the whole page) */
-  height: 100%; /* Full height (cover the whole page) */
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0,0,0,0.5); /* Black background with opacity */
-  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
-  cursor: pointer; /* Add a pointer on hover */
-}
+    position: fixed; /* Sit on top of the page content */
+    display: none; /* Hidden by default */
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
+    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+    cursor: pointer; /* Add a pointer on hover */
+  }
 
   .login-container {
     /* top: 1000px; */
@@ -149,7 +154,7 @@
 
   .login-form button {
     /* background-color: #6f42c1; */
-    background-color: #F48710;
+    background-color: #f48710;
     color: white;
     cursor: pointer;
   }

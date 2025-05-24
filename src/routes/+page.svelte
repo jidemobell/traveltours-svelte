@@ -1,10 +1,13 @@
+
 <script>
+  // import { onMount } from "svelte";
   import PackagesNew from "./components/PackagesNew.svelte";
   import TrendingDestinations from "./components/TrendingDestinations.svelte";
   import WhyUs from "./components/WhyUs.svelte";
 
   export let data;
-  const {packages} = data
+  const { packages } = data;
+  // console.log("Packages:", packages);
 </script>
 
 <style>

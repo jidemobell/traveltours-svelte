@@ -1,30 +1,30 @@
 import jwt from 'jsonwebtoken';
-import "dotenv/config";
 import { redirect } from "@sveltejs/kit";
 
 /** @type {import('./$types').LayoutServerLoad} */
-export async function load({ url, cookies, locals }) {
+export async function load({ url, cookies }) {
   const token = cookies.get("token");
-  if(!token){
-    if(url.pathname !== '/' && url.pathname !== '/auth' ) throw redirect(303, '/')
-    return { user: null }
-  }
 
-  if (token && url.pathname === '/auth') {
-    throw redirect(303, '/user');
+  // Allow landing and auth pages for everyone
+  const isPublic = url.pathname === '/' || url.pathname.startsWith('/auth');
+
+  if (!token) {
+    if (!isPublic) throw redirect(303, '/');
+    return { user: null };
   }
 
   try {
-    //verify jwt
-    const decoded = jwt.verify(token, 'your-secret-key' )
-    return { user: decoded}
-  }catch {
-    //invalid token
-    if (url.pathname !== '/') {
-      throw redirect(303, '/');
+    // Verify JWT (replace with your real secret)
+    const decoded = jwt.verify(token, 'your-secret-key');
+    // If user is logged in and tries to access /auth, redirect to /user or home
+    if (url.pathname.startsWith('/auth')) {
+      throw redirect(303, '/user');
     }
+    return { user: decoded };
+  } catch {
+    // Invalid token, treat as not logged in
+    if (!isPublic) throw redirect(303, '/');
     return { user: null };
   }
 }
-
 
