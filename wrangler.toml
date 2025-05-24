@@ -1,8 +1,9 @@
-compatibility_flags = [ "nodejs_compat" ]
+
 
 name = "jelvintours"
 main = "api/index.js" 
-compatibility_date = "2025-05-20" # Today's date
+compatibility_date = "2025-05-20"
+compatibility_flags = [ "nodejs_compat" ]
 
 [vars]
 FIREBASE_PROJECT_ID = "jelvintour"
@@ -20,4 +21,3 @@ workers_dev = true
 [account]
 id = "35be2a836c405cc11127292d19a0cee5" # Replace with your Cloudflare account ID
 
-# compatibility_flags = [ "nodejs_compat" ]
