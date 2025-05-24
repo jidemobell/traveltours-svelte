@@ -1,9 +1,9 @@
-
+compatibility_flags = [ "nodejs_compat" ]
 
 name = "jelvintours"
 main = "api/index.js" 
 compatibility_date = "2025-05-20"
-compatibility_flags = [ "nodejs_compat" ]
+
 
 [vars]
 FIREBASE_PROJECT_ID = "jelvintour"
