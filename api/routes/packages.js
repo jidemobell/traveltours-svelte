@@ -1,23 +1,31 @@
-import { Pool } from "@neondatabase/serverless";
+import { initializeApp, cert } from "firebase-admin/app";
+import { getDatabase } from "firebase-admin/database";
+
+// Initialize Firebase Admin
+const firebaseAdminApp = initializeApp({
+  credential: cert({
+    projectId: process.env.FIREBASE_PROJECT_ID,
+    clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+    privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+  }),
+  databaseURL: `https://jelvintour-default-rtdb.firebaseio.com/`
+});
 
 export async function handlePackages(request) {
-  // Optional: Only needed if you expect cross-origin browser requests
   const corsHeaders = {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Headers": "Content-Type",
     "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
   };
 
-  const pool = new Pool({
-    connectionString: "postgresql://traveltours_owner:BaZU9hmKqH8k@ep-cold-base-a53m37xe.us-east-2.aws.neon.tech/traveltours?sslmode=require",
-  });
-
   try {
     if (request.method === "GET") {
-      const { rows } = await pool.query("SELECT * FROM packages");
-      return new Response(JSON.stringify(rows), {
+      const db = getDatabase(firebaseAdminApp);
+      const snapshot = await db.ref("packages").once("value");
+      const packages = snapshot.val() || [];
+      return new Response(JSON.stringify(packages), {
         status: 200,
-        headers: corsHeaders, // Remove if not needed for CORS
+        headers: corsHeaders,
       });
     }
 
@@ -30,7 +38,5 @@ export async function handlePackages(request) {
         headers: corsHeaders,
       }
     );
-  } finally {
-    await pool.end();
   }
 }
