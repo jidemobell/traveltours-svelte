@@ -8,8 +8,13 @@ node_modules
 !.env.example
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+.wrangler
 
 # Local Netlify folder
 .netlify
 
+.codegpt
+.wrangler
+.vercel
+.netlify
 .codegpt
