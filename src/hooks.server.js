@@ -1,14 +1,13 @@
 //Use hooks to share the decoded JWT across the app.
-import jwt from 'jsonwebtoken';
 
 export async function handle({ event, resolve }) {
-  const token = event.cookies.get("token");
-  if (token) {
+  // Example: read user info from a cookie (if you store it as JSON)
+  const userCookie = event.cookies.get("user");
+  if (userCookie) {
     try {
-      const user = jwt.verify(token, 'your-secret-key' )
-      event.locals.user = user;
-    }catch (err) {
-      event.cookies.delete("token")
+      event.locals.user = JSON.parse(userCookie);
+    } catch {
+      event.cookies.delete("user");
     }
   }
   return resolve(event);
