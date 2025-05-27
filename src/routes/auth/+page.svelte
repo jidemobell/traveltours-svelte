@@ -1,7 +1,7 @@
 <script>
   import { onMount } from "svelte";
 
-  import { auth, provider, signInWithRedirect } from "$lib/firebase.js";
+  import { auth, provider, signInWithRedirect, getRedirectResult } from "$lib/firebase.js";
 
   function handleGoogleLogin() {
     signInWithRedirect(auth, provider);

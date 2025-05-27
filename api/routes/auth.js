@@ -1,6 +1,6 @@
-import { firebaseAdminApp } from "../utils/firebase-admin.js";
-import { getAuth } from "firebase-admin/auth";
-import { getDatabase } from "firebase-admin/database";
+// import { firebaseAdminApp } from "../utils/firebase-admin.js";
+// import { getAuth } from "firebase-admin/auth";
+// import { getDatabase } from "firebase-admin/database";
 
 // Only initialize Firebase Admin once
 // const firebaseAdminApp = initializeApp({
@@ -13,7 +13,7 @@ import { getDatabase } from "firebase-admin/database";
 // });
 
 export default {
-  async fetch(request, env, ctx) {
+  async fetch(request) {
     if (request.method !== "POST") {
       return new Response("Method Not Allowed", { status: 405 });
     }
@@ -24,33 +24,28 @@ export default {
         return new Response(JSON.stringify({ error: "Missing idToken" }), { status: 400 });
       }
 
-      // Verify Firebase ID token
-      const decoded = await getAuth(firebaseAdminApp).verifyIdToken(idToken);
+      // Verify ID token using Firebase REST API
+      const apiKey = process.env.FIREBASE_WEB_API_KEY;
+      const verifyUrl = `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${apiKey}`;
+      const verifyRes = await fetch(verifyUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ idToken })
+      });
+      const verifyData = await verifyRes.json();
+
+      if (!verifyData.users) {
+        return new Response(JSON.stringify({ error: "Invalid idToken" }), { status: 401 });
+      }
 
       // Extract user info
-      const { uid, email, name, picture } = decoded;
+      const user = verifyData.users[0];
 
-      // Upsert user in Realtime Database
-      const db = getDatabase(firebaseAdminApp);
-      const userRef = db.ref(`users/${uid}`);
-      await userRef.update({
-        email,
-        name,
-        picture,
-        lastLogin: Date.now()
-      });
+      // You can now upsert user info to your database via REST as needed
 
-      // Create a session token (JWT or similar)
-      // For demo, we'll just use a simple JSON string (replace with JWT in production)
-      const sessionToken = JSON.stringify({ uid, email });
-
-      // Set cookie (adjust options as needed)
-      return new Response(JSON.stringify({ user: { uid, email, name, picture } }), {
+      return new Response(JSON.stringify({ user }), {
         status: 200,
-        headers: {
-          "Set-Cookie": `token=${encodeURIComponent(sessionToken)}; Path=/; HttpOnly; Secure; SameSite=Strict`,
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" }
       });
     } catch (err) {
       return new Response(JSON.stringify({ error: err.message }), { status: 401 });
