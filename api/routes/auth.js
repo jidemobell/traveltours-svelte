@@ -13,7 +13,7 @@
 // });
 
 export default {
-  async fetch(request) {
+  async fetch(request, env) {
     if (request.method !== "POST") {
       return new Response("Method Not Allowed", { status: 405 });
     }
@@ -24,8 +24,8 @@ export default {
         return new Response(JSON.stringify({ error: "Missing idToken" }), { status: 400 });
       }
 
-      // Verify ID token using Firebase REST API
-      const apiKey = process.env.FIREBASE_WEB_API_KEY;
+      // 1. Verify ID token using Firebase Auth REST API
+      const apiKey = env.FIREBASE_WEB_API_KEY; // Use env variable from wrangler.toml
       const verifyUrl = `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${apiKey}`;
       const verifyRes = await fetch(verifyUrl, {
         method: "POST",
@@ -34,18 +34,41 @@ export default {
       });
       const verifyData = await verifyRes.json();
 
-      if (!verifyData.users) {
+      if (!verifyData.users || !verifyData.users[0]) {
         return new Response(JSON.stringify({ error: "Invalid idToken" }), { status: 401 });
       }
 
-      // Extract user info
+      // 2. Extract user info
       const user = verifyData.users[0];
+      const { localId: uid, email, displayName: name, photoUrl: picture } = user;
 
-      // You can now upsert user info to your database via REST as needed
+      // 3. Upsert user in Realtime Database using REST API
+      const dbUrl = `https://${env.FIREBASE_PROJECT_ID}.firebaseio.com/users/${uid}.json?auth=${idToken}`;
+      const dbRes = await fetch(dbUrl, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email,
+          name,
+          picture,
+          lastLogin: Date.now()
+        })
+      });
 
-      return new Response(JSON.stringify({ user }), {
+      if (!dbRes.ok) {
+        return new Response(JSON.stringify({ error: "Failed to update user in DB" }), { status: 500 });
+      }
+
+      // 4. Create a session token (simple JSON for demo)
+      const sessionToken = JSON.stringify({ uid, email });
+
+      // 5. Set cookie and return user info
+      return new Response(JSON.stringify({ user: { uid, email, name, picture } }), {
         status: 200,
-        headers: { "Content-Type": "application/json" }
+        headers: {
+          "Set-Cookie": `token=${encodeURIComponent(sessionToken)}; Path=/; HttpOnly; Secure; SameSite=Strict`,
+          "Content-Type": "application/json",
+        },
       });
     } catch (err) {
       return new Response(JSON.stringify({ error: err.message }), { status: 401 });
