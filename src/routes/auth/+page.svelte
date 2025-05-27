@@ -41,7 +41,7 @@
     <!-- Login Form Section -->
     <div class="login-form">
       <!-- <h1>Welcome to Design School</h1> -->
-      <div class="social-login" style="border: red solid 1px;">
+      <div class="social-login">
         <button on:click={handleGoogleLogin}>
           <img
             src="/images/jelvincoreimages/toursicons/2993685_brand_brands_google_logo_logos_icon.svg"
