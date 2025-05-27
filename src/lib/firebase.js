@@ -27,6 +27,8 @@ const config = {
   measurementId: AppConstants.measurementId,
 };
 
+console.log("Firebase config:", config);
+
 // Initialize Firebase app
 const app = initializeApp(config);
 
