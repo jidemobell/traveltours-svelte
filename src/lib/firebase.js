@@ -18,7 +18,7 @@ export const AppConstants = {
 // const GOOGLE_API_KEY = import.meta.env.VITE_API_GOOGLE_API_KEY
 
 const config = {
-  apiKey: import.meta.env.VITE_API_GOOGLE_API_KEY,
+  apiKey: import.meta.env.VITE_FIREBASE_WEB_API_KEY,
   authDomain: AppConstants.authDomain,
   projectId: AppConstants.projectId,
   storageBucket: AppConstants.storageBucket,
