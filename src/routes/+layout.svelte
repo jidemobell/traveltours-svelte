@@ -1,8 +1,11 @@
 <script>
   /** @type {import('./$types').LayoutData} */
+  import { user } from "$lib/stores/user";
   import Header from "./components/Header.svelte";
   import Footer from "./components/Footer.svelte";
-  export let data;
+  export let data = {};
+
+  $: user.set(data.user);
 </script>
 
 <svelte:head>
@@ -68,7 +71,7 @@
 </svelte:head>
 
 <div>
-  <Header {data} />
+  <Header />
   <main>
     <slot />
   </main>

@@ -1,7 +1,14 @@
 <script>
   import { onMount } from "svelte";
+  import { user as userStore } from "$lib/stores/user.js";
 
-  import { auth, provider, signInWithRedirect, getRedirectResult } from "$lib/firebase.js";
+
+  import {
+    auth,
+    provider,
+    signInWithRedirect,
+    getRedirectResult,
+  } from "$lib/firebase.js";
 
   function handleGoogleLogin() {
     signInWithRedirect(auth, provider);
@@ -21,6 +28,13 @@
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ idToken }),
         });
+        if (result.ok) {
+          // window.location.href = "/";
+          // Optionally get user info from response
+          const { user: userInfo } = await response.json();
+          userStore.set(userInfo); // Set the user in the store
+          // Optionally close modal or update UI
+        }
       }
     } catch (error) {
       console.error("Error during sign-in with redirect:", error);

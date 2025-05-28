@@ -21,7 +21,9 @@ export default {
     try {
       const { idToken } = await request.json();
       if (!idToken) {
-        return new Response(JSON.stringify({ error: "Missing idToken" }), { status: 400 });
+        return new Response(JSON.stringify({ error: "Missing idToken" }), {
+          status: 400,
+        });
       }
 
       // 1. Verify ID token using Firebase Auth REST API
@@ -30,17 +32,24 @@ export default {
       const verifyRes = await fetch(verifyUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ idToken })
+        body: JSON.stringify({ idToken }),
       });
       const verifyData = await verifyRes.json();
 
       if (!verifyData.users || !verifyData.users[0]) {
-        return new Response(JSON.stringify({ error: "Invalid idToken" }), { status: 401 });
+        return new Response(JSON.stringify({ error: "Invalid idToken" }), {
+          status: 401,
+        });
       }
 
       // 2. Extract user info
       const user = verifyData.users[0];
-      const { localId: uid, email, displayName: name, photoUrl: picture } = user;
+      const {
+        localId: uid,
+        email,
+        displayName: name,
+        photoUrl: picture,
+      } = user;
 
       // 3. Upsert user in Realtime Database using REST API
       const dbUrl = `https://${env.FIREBASE_PROJECT_ID}.firebaseio.com/users/${uid}.json?auth=${idToken}`;
@@ -51,27 +60,50 @@ export default {
           email,
           name,
           picture,
-          lastLogin: Date.now()
-        })
+          lastLogin: Date.now(),
+        }),
       });
 
       if (!dbRes.ok) {
-        return new Response(JSON.stringify({ error: "Failed to update user in DB" }), { status: 500 });
+        return new Response(
+          JSON.stringify({ error: "Failed to update user in DB" }),
+          { status: 500 }
+        );
       }
 
       // 4. Create a session token (simple JSON for demo)
       const sessionToken = JSON.stringify({ uid, email });
 
+      const allowedOrigins = [
+        "http://localhost:5173", // Local dev
+        "https://traveltours-svelte.pages.dev", // Cloudflare Pages
+        // "https://www.yourdomain.com",
+      ];
+
+      const origin = request.headers.get("Origin");
+      const corsOrigin = allowedOrigins.includes(origin)
+        ? origin
+        : allowedOrigins[1]; // Default to production
+
       // 5. Set cookie and return user info
-      return new Response(JSON.stringify({ user: { uid, email, name, picture } }), {
-        status: 200,
-        headers: {
-          "Set-Cookie": `token=${encodeURIComponent(sessionToken)}; Path=/; HttpOnly; Secure; SameSite=Strict`,
-          "Content-Type": "application/json",
-        },
-      });
+      return new Response(
+        JSON.stringify({ user: { uid, email, name, picture } }),
+        {
+          status: 200,
+          headers: {
+            "Set-Cookie": `token=${encodeURIComponent(
+              sessionToken
+            )}; Path=/; HttpOnly; Secure; SameSite=Strict`,
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": corsOrigin,
+            "Access-Control-Allow-Credentials": "true",
+          },
+        }
+      );
     } catch (err) {
-      return new Response(JSON.stringify({ error: err.message }), { status: 401 });
+      return new Response(JSON.stringify({ error: err.message }), {
+        status: 401,
+      });
     }
-  }
+  },
 };

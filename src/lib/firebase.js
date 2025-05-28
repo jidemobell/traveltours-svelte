@@ -1,4 +1,4 @@
-import { initializeApp } from 'firebase/app';
+import { initializeApp, getApps } from 'firebase/app';
 import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult, signInWithEmailAndPassword } from 'firebase/auth';
 
 export const AppConstants = {
@@ -29,7 +29,9 @@ const config = {
 
 
 // Initialize Firebase app
-const app = initializeApp(config);
+// const app = initializeApp(config);
+const app = getApps().length === 0 ? initializeApp(config) : getApps()[0];
+
 
 // Initialize Firebase Authentication and Provider
 const auth = getAuth(app);
